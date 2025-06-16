@@ -34,7 +34,7 @@
 
         <div class="mt-6">
           <button class="bg-blue-950 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white transition transform-colors duration-300 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" type="submit" value="Logar" style="cursor:pointer;">
-            Atualizar
+            Logar
           </button>
         </div>
       </form>

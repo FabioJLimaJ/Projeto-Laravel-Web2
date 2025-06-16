@@ -3,10 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
 
-Route::get('/', function () {
-    return view('template');
-});
 
+Route::redirect('/', '/produtos');
 // Route::get('/sobre', function () {
 //     return view('sobre');
 // });

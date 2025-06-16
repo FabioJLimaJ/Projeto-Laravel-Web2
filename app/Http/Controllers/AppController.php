@@ -200,6 +200,6 @@ public function exibirFeedback () {
 
 public function logout() {
     Session::flush();
-    return redirect('/home');
+    return redirect('/produtos');
 }
 }
