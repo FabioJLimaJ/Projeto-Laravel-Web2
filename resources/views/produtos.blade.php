@@ -1,29 +1,35 @@
-
 @extends('template')
 
+@section('titulo', 'Produtos')
+
 @section('conteudo')
-<div class="grid grid-cols-1 md:grid-cols-4 gap-5 p-3 place-items-center">
 
+<div class="flex flex-col items-center w-full mb-12 text-center">
+    <h1 class="text-3xl font-bold text-white mb-2">Nossos Produtos</h1>
+    <div class="h-1 w-24 bg-amber-500 rounded"></div>
+</div>
 
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
     @foreach ($prod as $p)
+    <div class="bg-stone-800 rounded-lg overflow-hidden flex flex-col border border-stone-700 transition-all duration-300 hover:border-amber-500 hover:-translate-y-1">
 
- <div class="bg-white shadow-md rounded-sm p-6 w-64  h-full flex flex-col">
+        <div class="w-full h-48 sm:h-56 bg-stone-700">
+            <img src="{{ asset('storage/' . $p['imagem']) }}" alt="Imagem de {{$p['nome']}}" class="w-full h-full object-cover">
+        </div>
 
-        <img src="{{ asset('storage/' . $p['imagem']) }}" alt="img" class=" border-2 border-gray-300 rounded-lg shadow">
+        <div class="p-5 flex flex-col flex-grow">
+            <h2 class="text-xl font-bold mb-2 text-stone-100 tracking-tight">{{$p['nome']}}</h2>
 
-      
-       <h2 class="text-xl font-semibold mb-2">{{$p['nome']}}</h2>
-      
-     <p class="text-gray-600">R$ {{$p['preco']}}</p>
-            
-        <br>
-      
-<button class="mt-auto bg-blue-900 hover:bg-blue-850 text-white font-bold py-2 px-4 rounded" style="cursor:pointer;">
-  Comprar
-</button>
+            <p class="text-2xl font-semibold text-amber-500 mb-4">
+                R$ {{ number_format($p['preco'], 2, ',', '.') }}
+            </p>
+
+            <button class="mt-auto w-full bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold py-2 px-4 rounded-md transition-colors duration-300">
+                Comprar
+            </button>
+        </div>
+    </div>
+    @endforeach
 </div>
 
-
-@endforeach
-</div>
 @endsection

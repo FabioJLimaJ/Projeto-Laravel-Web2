@@ -1,53 +1,72 @@
-
 @extends('template')
-@section('titulo', 'Sobre')
+
+@section('titulo', 'Editar Usuário')
+
 @section('conteudo')
 
+<div class="flex flex-col justify-start pt-8 sm:pt-12">
 
-<div class="flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="flex flex-col items-center w-full mb-10 text-center">
+      <h1 class="text-3xl font-bold text-white mb-2">Editar Usuário</h1>
+      <p class="text-lg text-stone-400">Altere os dados do usuário abaixo.</p>
+      <div class="mt-4 h-1 w-24 bg-amber-500 rounded"></div>
+  </div>
 
-  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-lg">
+    <div class="bg-stone-800 py-8 px-4 shadow-lg sm:rounded-lg sm:px-10 border border-stone-700">
 
-      <form action="/atualizarusuario/{{$user->id}}" method="POST">
-@csrf
-@method('put')
+      <form class="space-y-6" action="/atualizarusuario/{{$user->id}}" method="POST">
+        @csrf
+        @method('put')
+
         <div>
-          <label class="block text-sm font-medium text-gray-700" for="username">
-            Nome:
+          <label for="nome" class="block text-sm font-medium text-stone-300">
+            Nome Completo:
           </label>
           <div class="mt-1">
-            <input type="text" name="nome" id="nome" value="{{$user->nome}}" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required="" autocomplete="username">
+            <input id="nome" name="nome" type="text" autocomplete="name" required value="{{$user->nome}}" class="appearance-none block w-full px-3 py-2 bg-stone-900 border border-stone-600 rounded-md shadow-sm placeholder-stone-500 text-stone-200 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
           </div>
         </div>
 
-        <div class="mt-6">
-          <label class="block text-sm font-medium text-gray-700" for="email">
+        <div>
+          <label for="email" class="block text-sm font-medium text-stone-300">
             E-mail:
           </label>
           <div class="mt-1">
-            <input name="email" id="email" value="{{$user->email}}" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required="" autocomplete="email" type="email">
+            <input id="email" name="email" type="email" autocomplete="email" required value="{{$user->email}}" class="appearance-none block w-full px-3 py-2 bg-stone-900 border border-stone-600 rounded-md shadow-sm placeholder-stone-500 text-stone-200 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
           </div>
         </div>
 
-        <div class="mt-6">
-          <label class="block text-sm font-medium text-gray-700" for="senha">
-            Senha:
+        <div class="w-full border-t border-stone-700 pt-6">
+            <p class="text-sm text-stone-400">Preencha os campos abaixo somente se desejar alterar a senha.</p>
+        </div>
+
+        <div>
+          <label for="senha" class="block text-sm font-medium text-stone-300">
+            Nova Senha:
           </label>
           <div class="mt-1">
-            <input name="senha" id="senha" placeholder="deixe em branco pra senha atual" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" autocomplete="current-senha" type="text">
+            <input id="senha" name="senha" type="password" autocomplete="new-password" class="appearance-none block w-full px-3 py-2 bg-stone-900 border border-stone-600 rounded-md shadow-sm placeholder-stone-500 text-stone-200 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
           </div>
         </div>
 
-        
+        <div>
+          <label for="senha_confirmation" class="block text-sm font-medium text-stone-300">
+            Confirmar Nova Senha:
+          </label>
+          <div class="mt-1">
+            <input id="senha_confirmation" name="senha_confirmation" type="password" autocomplete="new-password" class="appearance-none block w-full px-3 py-2 bg-stone-900 border border-stone-600 rounded-md shadow-sm placeholder-stone-500 text-stone-200 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+          </div>
+        </div>
 
-        <div class="mt-6">
-          <button class="bg-blue-950 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white transition transform-colors duration-300 hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" type="submit" value="atualizar" style="cursor:pointer;">
-            Atualizar
+        <div>
+          <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-stone-950 bg-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-stone-800 focus:ring-amber-500 transition-colors duration-300">
+            Atualizar Usuário
           </button>
         </div>
       </form>
     </div>
   </div>
 </div>
+
 @endsection

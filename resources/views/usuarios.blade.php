@@ -1,64 +1,70 @@
 @extends('template')
-@section('titulo', 'Sobre')
+
+@section('titulo', 'Lista de Usuários')
+
 @section('conteudo')
 
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
+    {{-- Cabeçalho da Página --}}
+    <div class="mb-10 text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">Gerenciamento de Usuários</h1>
+        <p class="mt-3 text-xl text-stone-400">Visualize, edite ou remova usuários do sistema.</p>
+    </div>
 
-<div class="flex flex-col">
-    <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="overflow-hidden">
-                <table class="min-w-full">
-                    <thead class="bg-white border-b">
-                        
-                        <tr>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                #
-                            </th>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Nome
-                            </th>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Email
-                            </th>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Ações
-                            </th>
-                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Ações
-                            </th>
-                        </tr>
-                        
-                    </thead>
-                    @foreach($users as $u)
-                    <tbody>
-                        <tr class="bg-gray-100 border-b">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$u->id}}</td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                {{$u->nome}}
-                            </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                {{$u->email}}
-                            </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                <form action="/excluirusuario/{{$u->id}}" method="POST">
-@csrf
-@method('delete')
-<input type="submit" value="Excluir" style="cursor:pointer;" class="bg-red-700 group relative w-full flex justify-center py-2 px-1 border border-transparent text-sm font-medium rounded-md text-white transition transform-colors duration-300 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-</form>
-                            </td>
-<td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-    <a href="/frmeditusuario/{{$u->id}}" class="bg-yellow-600 group relative w-full flex justify-center py-2 px-1 border border-transparent text-sm font-medium rounded-md text-white transition transform-colors duration-300 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Editar</a>
-</td>
-                         
-                        </tr>
-
-@endforeach
-                    </tbody>
-                </table>
+    {{-- Container da Tabela --}}
+    <div class="flex flex-col">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="shadow overflow-hidden border-b border-stone-700 sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-stone-700">
+                        <thead class="bg-stone-800">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-400 uppercase tracking-wider">
+                                    ID
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-400 uppercase tracking-wider">
+                                    Nome
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-stone-400 uppercase tracking-wider">
+                                    Email
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-stone-400 uppercase tracking-wider">
+                                    Ações
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-stone-900 divide-y divide-stone-700">
+                            @foreach($users as $u)
+                            <tr class="hover:bg-stone-800 transition-colors duration-200">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-200">
+                                    {{$u->id}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-300">
+                                    {{$u->nome}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-stone-300">
+                                    {{$u->email}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <div class="flex items-center justify-center gap-x-4">
+                                        <a href="/frmeditusuario/{{$u->id}}" class="text-amber-500 hover:text-amber-400 font-semibold">Editar</a>
+                                        <form action="/excluirusuario/{{$u->id}}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este usuário?');">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="text-red-500 hover:text-red-400 font-semibold">Excluir</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+
 </div>
 
 @endsection
